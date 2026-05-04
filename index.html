@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LuxeCart — Premium Mini Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="header-inner">
+            <div class="logo">
+                <span class="logo-icon">◆</span> Luxe
+                <em>Cart</em>
+            </div>
+            <nav class="header-nav">
+                <span class="nav-tagline">Curated Essentials</span>
+            </nav>
+            <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span class="cart-label">Cart</span>
+        <span class="cart-badge" id="cartCount">0</span>
+      </button>
+        </div>
+    </header>
+
+    <!-- ===== HERO STRIP ===== -->
+    <div class="hero-strip">
+        <p>Free shipping on orders over Rs. 5,000 &nbsp;·&nbsp; Premium quality guaranteed &nbsp;·&nbsp; Easy returns</p>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main>
+
+        <!-- SIDEBAR FILTERS -->
+        <aside class="sidebar">
+            <div class="sidebar-inner">
+                <h3 class="sidebar-title">Categories</h3>
+                <ul class="filter-list">
+                    <li><button class="filter-btn active" data-cat="all">
+            <span class="filter-icon">✦</span> All Products <span class="filter-count" id="fc-all">16</span>
+          </button></li>
+                    <li><button class="filter-btn" data-cat="electronics">
+            <span class="filter-icon">⚡</span> Electronics <span class="filter-count" id="fc-electronics">4</span>
+          </button></li>
+                    <li><button class="filter-btn" data-cat="clothing">
+            <span class="filter-icon">◈</span> Clothing <span class="filter-count" id="fc-clothing">4</span>
+          </button></li>
+                    <li><button class="filter-btn" data-cat="food">
+            <span class="filter-icon">◉</span> Food &amp; Pantry <span class="filter-count" id="fc-food">4</span>
+          </button></li>
+                    <li><button class="filter-btn" data-cat="home">
+            <span class="filter-icon">◇</span> Home &amp; Living <span class="filter-count" id="fc-home">4</span>
+          </button></li>
+                </ul>
+
+                <div class="sidebar-divider"></div>
+
+                <div class="price-filter">
+                    <h4 class="price-filter-title">Sort By Price</h4>
+                    <div class="sort-btns">
+                        <button class="sort-btn active" data-sort="default">Default</button>
+                        <button class="sort-btn" data-sort="low">Low → High</button>
+                        <button class="sort-btn" data-sort="high">High → Low</button>
+                    </div>
+                </div>
+
+                <div class="sidebar-divider"></div>
+
+                <!-- Search -->
+                <div class="search-section">
+                    <h4 class="price-filter-title">Search</h4>
+                    <div class="search-box">
+                        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="searchInput" placeholder="Search products…" autocomplete="off" />
+                        <button class="search-clear" id="searchClear" aria-label="Clear search">✕</button>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+
+        <!-- PRODUCTS AREA -->
+        <section class="products-section">
+            <div class="products-header">
+                <h2 class="section-title">Our Collection</h2>
+                <span class="product-count-label" id="productCountLabel">Showing 16 products</span>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+        </section>
+
+    </main>
+
+    <!-- ===== CART OVERLAY ===== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- ===== CART DRAWER ===== -->
+    <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+        <div class="drawer-header">
+            <div class="drawer-title">
+                <span class="drawer-icon">◆</span> Your Cart
+            </div>
+            <button class="drawer-close" id="closeCart" aria-label="Close cart">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+        </div>
+
+        <div class="cart-items-wrap" id="cartItems"></div>
+
+        <div class="cart-footer" id="cartFooter">
+            <div class="summary-row">
+                <span class="summary-label">Subtotal</span>
+                <span class="summary-value" id="subtotalAmount">Rs. 0</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Shipping</span>
+                <span class="summary-value" id="shippingNote">Calculated at checkout</span>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-row total-row">
+                <span class="total-label">Total</span>
+                <span class="total-amount" id="totalAmount">Rs. 0</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn">
+        Proceed to Checkout
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+            <button class="continue-btn" id="continueBtn">Continue Shopping</button>
+        </div>
+    </aside>
+
+    <!-- ===== TOAST NOTIFICATION ===== -->
+    <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
